@@ -12,3 +12,7 @@ HEAD 指向当前版本
 git reset --hard commit_id  回退或返回未来的某个版本  commit_id可以是id，也可以写成HEAD^ or HEAD~1回退到某个版本
 git log 可以查看提交历史 便于确定要回退到哪个版本  后面加上 --pretty=online让内容显示为一行
 git reflog  查看命令历史 便于确定要回到未来的哪个版本
+
+// 撤销修改
+git checkout -- <file>   撤销工作区的修改
+git reset HEAD <file>  撤销提交到缓冲区的修改
