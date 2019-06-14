@@ -16,3 +16,9 @@ git reflog  查看命令历史 便于确定要回到未来的哪个版本
 // 撤销修改
 git checkout -- <file>   撤销工作区的修改
 git reset HEAD <file>  撤销提交到缓冲区的修改
+
+// 删除文件
+rm <file>   工作区删除文件
+git rm <file>   删除文件添加到缓冲区
+git commit -m <message>   提交删除
+
