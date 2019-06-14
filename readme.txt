@@ -22,3 +22,12 @@ rm <file>   工作区删除文件
 git rm <file>   删除文件添加到缓冲区
 git commit -m <message>   提交删除
 
+//本地创建SSH Key
+ssh-keygen -t rsa -C "youremail@example.com"
+
+// 本地仓库的内容推送到GitHub仓库
+git remote add origin git@github.com:account/learngit.git 本地库与git仓库关联   origin是远程库的名字
+若是出现已存在的错误  就先删除：git remote rm origin
+git push -u origin master   //本地得当前分支master推送到远程，并且把远程的master与本地的master关联起来，可以简化命令  远程是空的需要添加-u参数 
+
+
