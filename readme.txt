@@ -31,3 +31,6 @@ git remote add origin git@github.com:account/learngit.git 本地库与git仓库�
 git push -u origin master   //本地得当前分支master推送到远程，并且把远程的master与本地的master关联起来，可以简化命令  远程是空的需要添加-u参数 
 
 
+// 克隆
+git clone git@github.com:account/repository.git  从远程克隆到本地
+git支持多种协议，包括https git（更快）
