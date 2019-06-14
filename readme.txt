@@ -34,3 +34,5 @@ git push -u origin master   //本地得当前分支master推送到远程，并�
 // 克隆
 git clone git@github.com:account/repository.git  从远程克隆到本地
 git支持多种协议，包括https git（更快）
+
+// 创建分支
