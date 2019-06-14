@@ -41,3 +41,8 @@ git branch  查看当前分支
 git merge dev  合并指定分支dev到当前分支：这个命令前先切换分支到要合并的那个分支
     --结果信息：Fast-forward 表示这次合并是“快进模式”
 git branch -d dev  删除dev分支
+
+//修改冲突
+当git无法自动合并分支时，就必须首先解决冲突，解决冲突后再提交，合并完成。
+解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容再add commit 提交。
+git log --graph  可以看到分支合并图
