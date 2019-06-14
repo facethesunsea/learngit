@@ -35,4 +35,9 @@ git push -u origin master   //本地得当前分支master推送到远程，并�
 git clone git@github.com:account/repository.git  从远程克隆到本地
 git支持多种协议，包括https git（更快）
 
-// 创建分支
+// 创建分支和合并分支
+git checkout -b dev  创建并切换分支dev  相当于这两个命令： git branch dev + git checkout dev
+git branch  查看当前分支
+git merge dev  合并指定分支dev到当前分支：这个命令前先切换分支到要合并的那个分支
+    --结果信息：Fast-forward 表示这次合并是“快进模式”
+git branch -d dev  删除dev分支
