@@ -46,3 +46,12 @@ git branch -d dev  删除dev分支
 当git无法自动合并分支时，就必须首先解决冲突，解决冲突后再提交，合并完成。
 解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容再add commit 提交。
 git log --graph  可以看到分支合并图
+
+// 分支管理
+Fast forward模式下，删除分支后会丢掉分支信息
+--no-ff 禁用ff模式 git会再merge时生成一个新的commit，可看出分支信息
+git merge --no-ff -m <message> dev  禁用Fast forword模式，本次合并要创建一个新的commit，所以要加上描述
+分支策略：
+master：稳定版本 不能干活
+dev：不稳定 在这里干活
+other_branch：小伙伴都在自己的分支上干活 然后往dev分支上合并就好了
