@@ -42,7 +42,7 @@ git checkout -b dev  创建并切换分支dev  相当于这两个命令： git b
 git branch  查看当前分支
 git merge dev  合并指定分支dev到当前分支：这个命令前先切换分支到要合并的那个分支
     --结果信息：Fast-forward 表示这次合并是“快进模式”
-git branch -d dev  删除dev分支
+git branch -d dev  删除dev分支（分支未合并删除的话会失败，将丢掉修改，强行删除需要使用大写的-D参数）
 
 //修改冲突
 当git无法自动合并分支时，就必须首先解决冲突，解决冲突后再提交，合并完成。
@@ -67,4 +67,35 @@ git stash apply + git stash drop 两步：先恢复，后删除stash恢复的内
 git stash pop  一步：恢复的同时把stash内容也删除了
 git stash apply stash@{0}  恢复指定的stash
 
+//Feature分支
+新功能分支，合并到dev，若是未合并删除：
+git branch -d feature-xx  删除分支失败
+git branch -D feature-xx  使用大写的强行删除
 
+// 多人协作
+git remote -v  查看远程库的信息  加上-v显示的信息更详细
+git push origin  master  推送分支，指定本地分支master  可以是其他分支dev...
+分支推送：  master主分支 时刻与远程同步
+            dev开发分支 需要与远程同步
+			bug 没必要推送到远程
+			feature分支是否推送到远程 取决于是否协同合作
+git checkout -b dev origin/dev  创建远程origin的dev分支到本地，创建本地dev分支
+git pull  把最新的提交送origin/dev抓下来  失败：没有指定本地dev分支与远程origin/dev分支的链接
+git branch --set-upstream-to=origin/dev dev  设置dev和origin/dev的链接
+git pull 再pull  合并冲突 先手动解决  再提交 push
+------------------------------------------------------------------
+多人协作的工作模式通常是这样：
+首先，可以试图用git push origin <branch-name>推送自己的修改
+如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并
+如果合并有冲突，则解决冲突，并在本地提交
+没有冲突或者解决掉冲突后，再用git push origin <branch-name>推送就能成功！
+如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>。
+
+小结
+查看远程库信息，使用git remote -v；
+本地新建的分支如果不推送到远程，对其他人就是不可见的；
+从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；
+在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；
+建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
+从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
+------------------------------------------------------------------
