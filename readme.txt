@@ -106,4 +106,15 @@ git rebase  把原本分叉的变成一条直线
 （本地分支的内容比远程的多了n步，直接push，因远程内容已更新多，需要先pull后push，pull到本地后合并，这时的提交历史图有两条线，略微繁杂，使用git rebase可以把两条线合并成一条后顺序：pull这个历史记提到最前，修改提后，没有原两条线的merge这个提交  --自己理解，具体看课程）
 
 
-
+// 标签管理
+// 创建标签
+git tag   查看所有标签，不按时间顺序列出 而是字母排序
+git tag tag_name  创建标签  默认标签打在最新提交的commit上  存储在本地
+git tag tag_name commit_id  为某次提交创建标签
+git tag -a tag_name -m message commit_id   -a指定标签名 -m指定说明文字
+git show <tagname> 查看标签信息
+// 操作标签
+git tag -d tag_name   删除标签
+git push origin <tagname>   推送某个标签到远程
+git push origin --tags   一次性推送全部尚未推送到远程的本地标签
+git push origin :refs/tags/tag_name   删除远程的标签  本地标签需先删除
