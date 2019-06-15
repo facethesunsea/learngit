@@ -99,3 +99,11 @@ git pull 再pull  合并冲突 先手动解决  再提交 push
 建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
 从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
 ------------------------------------------------------------------
+
+// Rebase
+git log --graph --pretty=oneline --abbrev-commit   查看提交历史 一行，显示图   有些看上去会很乱
+git rebase  把原本分叉的变成一条直线
+（本地分支的内容比远程的多了n步，直接push，因远程内容已更新多，需要先pull后push，pull到本地后合并，这时的提交历史图有两条线，略微繁杂，使用git rebase可以把两条线合并成一条后顺序：pull这个历史记提到最前，修改提后，没有原两条线的merge这个提交  --自己理解，具体看课程）
+
+
+
