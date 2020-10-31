@@ -11,7 +11,7 @@ git  diff <file>  查看被修改的内容
 
 // 这里开始版本回退
 HEAD 指向当前版本
-git reset --hard commit_id  回退或返回未来的某个版本  commit_id可以是id，也可以写成HEAD^ or HEAD~1回退到某个版本
+git reset --hard commit_id  回退或返回未来的某个版本  commit_id可以是id，也可以写成HEAD^=HEAD~1回退到某个版本
 git log 可以查看提交历史(-1 显示最近一次提交) 便于确定要回退到哪个版本  后面加上 --pretty=online让内容显示为一行
 git reflog  查看命令历史 便于确定要回到未来的哪个版本
 
@@ -45,7 +45,7 @@ git merge dev  合并指定分支dev到当前分支：这个命令前先切换�
 git branch -d dev  删除dev分支（分支未合并删除的话会失败，将丢掉修改，强行删除需要使用大写的-D参数）
 
 //修改冲突
-当git无法自动合并分支时，就必须首先解决冲突，解决冲突后再提交，合并完成。
+当git无法自动合并分支时，就必须首先解决冲突，解决冲突后再add commit提交，合并完成。
 解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容再add commit 提交。
 git log --graph  可以看到分支合并图
 
@@ -82,7 +82,7 @@ git push origin  master  推送分支，指定本地分支master  可以是其�
 git checkout -b dev origin/dev  创建远程origin的dev分支到本地，创建本地dev分支
 git pull  把最新的提交送origin/dev抓下来  失败：没有指定本地dev分支与远程origin/dev分支的链接
 git branch --set-upstream-to=origin/dev dev  设置dev和origin/dev的链接
-git pull 再pull  合并冲突 先手动解决  再提交 push
+git pull 再pull  合并冲突 先手动解决  再add commit push
 ------------------------------------------------------------------
 多人协作的工作模式通常是这样：
 首先，可以试图用git push origin <branch-name>推送自己的修改
@@ -101,9 +101,9 @@ git pull 再pull  合并冲突 先手动解决  再提交 push
 ------------------------------------------------------------------
 
 // Rebase
-git log --graph --pretty=oneline --abbrev-commit   查看提交历史 一行，显示图   有些看上去会很乱
+git log --graph --pretty=oneline --abbrev-commit   查看提交历史 一行，显示图   push失败再pull，图看上去会很乱
 git rebase  把原本分叉的变成一条直线
-（本地分支的内容比远程的多了n步，直接push，因远程内容已更新多，需要先pull后push，pull到本地后合并，这时的提交历史图有两条线，略微繁杂，使用git rebase可以把两条线合并成一条后顺序：pull这个历史记提到最前，修改提后，没有原两条线的merge这个提交  --自己理解，具体看课程）
+（本地分支的内容比远程的多了n步，直接push，因远程内容已更新多，需要先pull后push，pull到本地后合并，这时的提交历史图有两条线，略微繁杂，使用git rebase可以把两条线合并成一条线顺序：pull这个历史提到最前，修改提后，没有原两条线的merge这个提交  --自己理解，具体看课程）
 
 
 // 标签管理
@@ -121,8 +121,8 @@ git push origin :refs/tags/tag_name   删除远程的标签  本地标签需先�
 
 // github
 访问一个项目的主页，点击Fork在自己的账号下克隆一个仓库
-从自己账号下clone，自己有推送修改权限
-在GitHub上发起一个pull request推送给他人的项目
+从自己账号下clone，自己对自己的Github有推送修改权限
+在GitHub给Fork的这个项目发起一个pull request推送
 
 
 // 忽略特殊文件
@@ -142,13 +142,14 @@ git config --global alias.xx status   为status设置别名xx   --global全局�
 拥有sudo权限的用户账号
 1. sudo apt-get install git 安装git
 2. sudo adduser git  创建一个git用户，用来运行git服务
-3. 创建证书登录： 手机登录用户的公钥 导入到/home/git/.ssh/authorized_keys文件里，一行一个
+3. 创建证书登录： 收集需要登录的用户的公钥 导入到/home/git/.ssh/authorized_keys文件里，一行一个
 4. 初始化Git仓库：选定一个目录作为Git仓库，假定/srv/sample.git 在/srv目录下输入命令：  sudo git init --bare sample.git
    Git会创建一个裸仓库，没有工作区 git仓库通常以.git结尾，然后把owner改为git：sudo chown -R git:git sample.git
 5. 禁用shell登录：为了安全考虑 第二步创建的git用户不允许登录shell-》编辑/etc/passwd文件git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell
    --git用户苦役正常登录ssh使用git 但无法登录shell
 6. 克隆远程仓库：  git clone git@server:/srv/sample.git
 
-管理公钥 管理权限 用Gitosis  -- 控制
+管理公钥 成员多用Gitosis
+管理权限
 
 
