@@ -1,0 +1,5 @@
+linux的相关网站：
+https://cloud.tencent.com/developer/article/1600955  Linux常见命令 内容比较多
+https://segmentfault.com/a/1190000022659429   ubuntu linux常规命令  超级多
+https://zhuanlan.zhihu.com/p/113475275   Linux命令小技巧
+https://segmentfault.com/a/1190000010421178   应掌握的linux命令  比较少
